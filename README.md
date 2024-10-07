@@ -59,3 +59,51 @@ Le fichier de config est present dans le dans le dossier research network
 
 > [!TIP]
 > To increase the number of providers in your network, you simply need to add more entries under the PeerOrgs section of the crypto-config.yaml file. If you want to add more peers to an existing provider, modify the Count value in the Template section for that provider. After making changes, regenerate the cryptographic material using the same cryptogen command to reflect the updated network configuration.
+
+
+# Step 3: Create the Genesis Block and Channel Configuration
+- Create the Configuration File: Create a configtx.yaml file to define the network's orderer and channel details.
+- Generate the Genesis Block for the Orderer:
+```
+      ../bin/configtxgen -profile OrdererGenesis -outputBlock ./channel-artifacts/genesis.block -channelID channelorderergenesis
+```
+- Generate Channel Configuration:
+```
+      ../bin/configtxgen -profile ChannelCoop -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID channelcoop
+```
+- Generate Channel Configuration:
+```
+      ../bin/configtxgen -profile ChannelCoop -outputAnchorPeersUpdate ./channel-artifacts/Provider1Anchor.tx -channelID channelcoop -asOrg Provider1MSP
+      ../bin/configtxgen -profile ChannelCoop -outputAnchorPeersUpdate ./channel-artifacts/Provider2Anchor.tx -channelID channelcoop -asOrg Provider2MSP
+      ../bin/configtxgen -profile ChannelCoop -outputAnchorPeersUpdate ./channel-artifacts/Provider3Anchor.tx -channelID channelcoop -asOrg Provider3MSP
+      ../bin/configtxgen -profile ChannelCoop -outputAnchorPeersUpdate ./channel-artifacts/Provider4Anchor.tx -channelID channelcoop -asOrg Provider4MSP
+      ../bin/configtxgen -profile ChannelCoop -outputAnchorPeersUpdate ./channel-artifacts/Provider5Anchor.tx -channelID channelcoop -asOrg Provider5MSP
+```
+
+# Step 4: Docker Configuration
+- Create Docker Configuration Files: Create the following Docker configuration files in the research-network/docker directory:
+  - docker-compose.yaml: Defines the services for peers, orderer, and other network components.
+  - peer.yaml: Configuration specific to peer nodes.
+- Set the Docker Environment:
+
+```
+      echo COMPOSE_PROJECT_NAME=net > .env
+```
+- Start the Docker Containers:
+
+```
+      sudo docker-compose -f docker-compose-cli.yaml up -d
+```
+
+
+
+> [!IMPORTANT]
+> Restart Docker Containers if Necessary: If there is an error, stop all containers and remove them:
+>```
+      docker stop $(docker ps -aq)
+      docker rm $(docker ps -aq)
+      docker volume prune
+      docker network prune
+      docker images
+>```
+
