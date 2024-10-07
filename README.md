@@ -25,3 +25,22 @@ Before you begin, make sure you have the following installed on your machine, to
       curl -sSLO https://github.com/hyperledger/fabric-ca/releases/download/v1.5.12/hyperledger-fabric-ca-linux-amd64-1.5.12.tar.gz
       tar -xzvf hyperledger-fabric-ca-linux-amd64-1.5.12.tar.gz
 ```
+# Step 1: Architecture decision for the blockchain :
+
+Before proceeding to the following, we must decide in advance on the architecture of our blockchain, how many organizations and peers, combination of channels and orders, what type of consensus CTO (RAFT) or Byzantine-Fault (BFT).
+
+These elements are important in our case, our blockchain has 5 Organizations with 1 peer per Organization managed by 1 orderer and using Raft as a consensus protocol, if you wish to have a larger architecture, it will be explained at each step how to increase it.
+
+# Step 2: Create the cryptographic material for our network entities  :
+After extracting the archive you will have a folder named "fabric-samples" we will create a folder in this folder which will contain all the configuration and deployment elements of our network in my case it will be called "research-network".
+```
+      mkdir fabric-samples/research-network
+```
+To generate cryptographic material for all network entities we using the cryptogen tool.
+
+- Create the Crypto Config File: Create a config-crypto.yaml file that defines the network topology and cryptographic setup for the providers and orderer.
+```
+      sudo vim config-crypto.yaml
+      ../bin/cryptogen generate --config config-crypto.yaml --output=config-crypto
+```
+This command generates all the certificates and keys for the organizations, their peers, and the orderer node.
