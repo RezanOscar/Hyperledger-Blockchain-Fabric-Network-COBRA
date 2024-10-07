@@ -20,6 +20,6 @@ Before you begin, make sure you have the following installed on your machine, to
 - Docker Compose: Install Docker Compose
 - Hyperledger Fabric Binaries: Download the binaries and Docker images for Fabric.
 ```
-  - curl -sSLO https://github.com/hyperledger/fabric-ca/releases/download/v1.5.12/hyperledger-fabric-ca-linux-amd64-1.5.12.tar.gz
-  - tar -xzvf hyperledger-fabric-ca-linux-amd64-1.5.12.tar.gz
+      curl -sSLO https://github.com/hyperledger/fabric-ca/releases/download/v1.5.12/hyperledger-fabric-ca-linux-amd64-1.5.12.tar.gz
+      tar -xzvf hyperledger-fabric-ca-linux-amd64-1.5.12.tar.gz
 ```
