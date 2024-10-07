@@ -100,10 +100,10 @@ Le fichier de config est present dans le dans le dossier research network
 > [!IMPORTANT]
 > Restart Docker Containers if Necessary: If there is an error, stop all containers and remove them:
 >```
-      docker stop $(docker ps -aq)
-      docker rm $(docker ps -aq)
-      docker volume prune
-      docker network prune
-      docker images
+>      docker stop $(docker ps -aq)
+>      docker rm $(docker ps -aq)
+>      docker volume prune
+>      docker network prune
+>      docker images
 >```
 
