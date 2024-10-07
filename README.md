@@ -107,3 +107,63 @@ Le fichier de config est present dans le dans le dossier research network
 >      docker images
 >```
 
+# Step 4: Joining the Network
+
+- Execute Docker Commands for Each Peer: Run the following commands for each peer to join them to the network. Open separate terminal windows for each peer.
+```
+      docker exec -e "CORE_PEER_LOCALMSPID=Provider1MSP" -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro1.research-network.com/peers/peer0.pro1.research-network.com/tls/ca.crt" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro1.research-network.com/users/Admin@pro1.research-network.com/msp" -e "CORE_PEER_ADDRESS=peer0.pro1.research-network.com:7051" -it cli bash
+      docker exec -e "CORE_PEER_LOCALMSPID=Provider2MSP" -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro2.research-network.com/peers/peer0.pro2.research-network.com/tls/ca.crt" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro2.research-network.com/users/Admin@pro2.research-network.com/msp" -e "CORE_PEER_ADDRESS=peer0.pro2.research-network.com:7051" -it cli bash
+      docker exec -e "CORE_PEER_LOCALMSPID=Provider3MSP" -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro3.research-network.com/peers/peer0.pro3.research-network.com/tls/ca.crt" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro3.research-network.com/users/Admin@pro3.research-network.com/msp" -e "CORE_PEER_ADDRESS=peer0.pro3.research-network.com:7051" -it cli bash
+      docker exec -e "CORE_PEER_LOCALMSPID=Provider4MSP" -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro4.research-network.com/peers/peer0.pro4.research-network.com/tls/ca.crt" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro4.research-network.com/users/Admin@pro4.research-network.com/msp" -e "CORE_PEER_ADDRESS=peer0.pro4.research-network.com:7051" -it cli bash
+      docker exec -e "CORE_PEER_LOCALMSPID=Provider5MSP" -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro5.research-network.com/peers/peer0.pro5.research-network.com/tls/ca.crt" -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/fabric-samples/research-network/crypto-config/peerOrganizations/pro5.research-network.com/users/Admin@pro5.research-network.com/msp" -e "CORE_PEER_ADDRESS=peer0.pro5.research-network.com:7055" -it cli bash
+```
+- Add environement varible in all the terminal:
+```
+      export ORDERER_CA=/opt/gopath/fabric-samples/research-network/crypto-config/ordererOrganizations/research-network.com/orderers/orderer.research-network.com/msp/tlscacerts/tlsca.research-network.com-cert.pem
+```
+- Create and Join the Channel: In one terminal:
+```
+      peer channel create -o orderer.research-network.com:7050 -c channelcoop -f /opt/gopath/fabric-samples/research-network/channel-artifacts/channel.tx --tls --cafile $ORDERER_CA
+```
+  - In each peer's terminal, join them to the channel: 
+```
+      peer channel join -b channelcoop.block --tls --cafile $ORDERER_CA
+```
+- Update Anchor Peers: Update the anchor peers for each provider:
+```
+      peer channel update -o orderer.research-network.com:7050 -c channelcoop -f /opt/gopath/fabric-samples/research-network/channel-artifacts/Provider1Anchor.tx --tls --cafile $ORDERER_CA
+      peer channel update -o orderer.research-network.com:7050 -c channelcoop -f /opt/gopath/fabric-samples/research-network/channel-artifacts/Provider2Anchor.tx --tls --cafile $ORDERER_CA
+      peer channel update -o orderer.research-network.com:7050 -c channelcoop -f /opt/gopath/fabric-samples/research-network/channel-artifacts/Provider3Anchor.tx --tls --cafile $ORDERER_CA
+      peer channel update -o orderer.research-network.com:7050 -c channelcoop -f /opt/gopath/fabric-samples/research-network/channel-artifacts/Provider4Anchor.tx --tls --cafile $ORDERER_CA
+      peer channel update -o orderer.research-network.com:7050 -c channelcoop -f /opt/gopath/fabric-samples/research-network/channel-artifacts/Provider5Anchor.tx --tls --cafile $ORDERER_CA
+```
+
+# Step 6: Verifying the Network Setup
+- Check Docker Logs: Use the following command to check the logs of any container:
+```
+      docker compose logs <container-id>
+```
+- Verify the Network Setup: Ensure that all peers and the orderer are up and running without issues.
+
+> [!WARNING]
+> If you encounter issues with Docker containers not starting or joining the network, use the following commands to clean up:
+>```
+>      docker stop $(docker ps -aq)
+>      docker rm $(docker ps -aq)
+>      docker volume prune
+>      docker network prune
+>```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
