@@ -31,6 +31,8 @@ Before proceeding to the following, we must decide in advance on the architectur
 
 These elements are important in our case, our blockchain has 5 Organizations with 1 peer per Organization managed by 1 orderer and using Raft as a consensus protocol, if you wish to have a larger architecture, it will be explained at each step how to increase it.
 
+In this tutorial, all the Organisation are named Provider
+
 # Step 2: Create the cryptographic material for our network entities  :
 After extracting the archive you will have a folder named "fabric-samples" we will create a folder in this folder which will contain all the configuration and deployment elements of our network in my case it will be called "research-network".
 ```
@@ -44,3 +46,16 @@ To generate cryptographic material for all network entities we using the cryptog
       ../bin/cryptogen generate --config config-crypto.yaml --output=config-crypto
 ```
 This command generates all the certificates and keys for the organizations, their peers, and the orderer node.
+
+Le fichier de config est present dans le dans le dossier research network
+## Explanation of the Configuration
+- OrdererOrgs: This section defines the ordering service for the blockchain network. Currently, it has one orderer node specified with the hostname orderer.
+ PeerOrgs: This section lists all the providers (peers) in the network. Each provider (e.g., Provider1, Provider2) represents a different organization that will participate in the blockchain.
+### Key Parameters:
+- Domain: Specifies the domain for each organization.
+- EnableNodeOUs: Enables the Organizational Units (OUs) that help manage certificates.
+- Template Count: Defines the number of peers for each organization. By default, each provider has one peer.
+- Users Count: Specifies the number of admin users to generate for each provider.
+
+> [!TIP]
+> To increase the number of providers in your network, you simply need to add more entries under the PeerOrgs section of the crypto-config.yaml file. If you want to add more peers to an existing provider, modify the Count value in the Template section for that provider. After making changes, regenerate the cryptographic material using the same cryptogen command to reflect the updated network configuration.
