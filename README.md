@@ -13,7 +13,9 @@ This setup aims to secure interactions among entities with a common goal while m
 
 > [!NOTE]
 > ***Please note that the blockchain cannot be used for production. For this, a complete architecture will have to be created. You can find all the necessary information on the Hyperledger. This blockchain can be used for experimentation, training, research or to do proof of work.***
+> 
 > ***Do not hesiate to contribute or signal if you see errors or if you have any questions :blush:***
+>
 > ***Finally, this project was created to be used with my COBRA framework for my research on creating a collaboration framework using blockchain for Cooperative Edge composed of Edge Server and UAV. "https://github.com/RezanOscar/COBRA"***
 
 > [!CAUTION]
