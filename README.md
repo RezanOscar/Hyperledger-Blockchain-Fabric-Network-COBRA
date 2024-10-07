@@ -155,8 +155,43 @@ Le fichier de config est present dans le dans le dossier research network
 >```
 
 
+# Troubleshooting
 
+- 2024-07-09 14:16:47.340 UTC 0003 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+Error: got unexpected status: BAD_REQUEST -- error validating channel creation transaction for new channel 'channelcoop', could not successfully apply update to template configuration: error authorizing update: error validating DeltaSet: policy for [Group]  /Channel/Application not satisfied: implicit policy evaluation failed - 0 sub-policies were satisfied, but this policy requires 1 of the 'Admins' sub-policies to be satisfied
 
+**Solution : Check if the variables put in the docker exec correspond to what is present in the configtx.yaml file**
+
+- 2024-07-10 10:31:14.775 UTC 0005 PANI [orderer.common.server] Main -> Failed validating bootstrap block: cannot enable channel capabilities without orderer support first panic: Failed validating bootstrap block: cannot enable channel capabilities without orderer support first         [orderer.common.server] Main -> Failed validating bootstrap block: cannot enable channel capabilities without orderer support first panic: Failed validating bootstrap block: cannot enable channel capabilities without orderer support first goroutine 1 [running]: go.uber.org/zap/zapcore.CheckWriteAction.OnWrite(0x0?, 0x0?, {0x0?, 0x0?, 0xc000316940?})
+
+**Solution:You need to add Capabilities: <<: \*OrdererCapabilities in the orderer section**
+
+- Failed validating bootstrap block: initializing channelconfig failed: could not create channel Orderer sub-group config: Orderer Org OrderingService cannot contain endpoints value until V1_4_2+ capabilities have been enabled
+panic: Failed validating bootstrap block: initializing channelconfig failed: could not create channel Orderer sub-group config: Orderer Org OrderingService cannot contain endpoints value until V1_4_2+ capabilities have been enabled
+**Solution:**
+```
+      Capabilities:
+	    Channel: &ChannelCapabilities
+	        V2_0: true
+	    Orderer: &OrdererCapabilities    
+	        V2_0: true
+	    Application: &ApplicationCapabilities
+	        V2_0: true
+```
+	
+- 0003 INFO [channelCmd] InitCmdFactory -> Endorser and orderer connections initialized
+- Error: proposal failed (err: rpc error: code = Unknown desc = error validating proposal: access denied: channel [] creator org unknown, creator is malformed)**
+- Error in the docker-compose.yaml or configtx file correctly linked in particular Environment Variable Error: failed to retrieve broadcast client: failed to load config for OrdererClient: unable to load orderer.tls.rootcert.file: open /etc/hyperledger/ fabric/--channelID: no such file or directory**
+
+**Solution: export ORDERER_CA=/opt/gopath/fabric-samples/research-network/crypto-config/ordererOrganizations/research-network.com/orderers/orderer.research-network.com/msp/tlscacerts/tlsca.research-network.com-cert.pem**
+
+- Failed to query chaincode: Failed to get endorsing peers: error getting channel response for channel [channelcoop]: Discovery status Code: (11) UNKNOWN. Description: error received from Discovery Server: failed constructing descriptor for chaincodes:<name:"test_4" >
+
+**Solution: check if the Smart Contract name matches the committed one with this command "peer lifecycle chaincode querycommitted -C channelcoop"**
+
+- failed: sanitizeCert failed the supplied identity is not valid: x509: certificate signed by unknown authority
+
+**Solution : Switch to GO version lower than 1.18.5 "go version"**
 
 
 
