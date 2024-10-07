@@ -164,7 +164,7 @@ Error: got unexpected status: BAD_REQUEST -- error validating channel creation t
 
 - 2024-07-10 10:31:14.775 UTC 0005 PANI [orderer.common.server] Main -> Failed validating bootstrap block: cannot enable channel capabilities without orderer support first panic: Failed validating bootstrap block: cannot enable channel capabilities without orderer support first         [orderer.common.server] Main -> Failed validating bootstrap block: cannot enable channel capabilities without orderer support first panic: Failed validating bootstrap block: cannot enable channel capabilities without orderer support first goroutine 1 [running]: go.uber.org/zap/zapcore.CheckWriteAction.OnWrite(0x0?, 0x0?, {0x0?, 0x0?, 0xc000316940?})
 
-**Solution:You need to add Capabilities: <<: \*OrdererCapabilities in the orderer section**
+**Solution: You need to add Capabilities: <<: \*OrdererCapabilities in the orderer section**
 
 - Failed validating bootstrap block: initializing channelconfig failed: could not create channel Orderer sub-group config: Orderer Org OrderingService cannot contain endpoints value until V1_4_2+ capabilities have been enabled
 panic: Failed validating bootstrap block: initializing channelconfig failed: could not create channel Orderer sub-group config: Orderer Org OrderingService cannot contain endpoints value until V1_4_2+ capabilities have been enabled
