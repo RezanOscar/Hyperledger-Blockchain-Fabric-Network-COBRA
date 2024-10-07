@@ -30,6 +30,7 @@ This setup aims to secure interactions among entities with a common goal while m
 # Prerequisites
 Before you begin, make sure you have the following installed on your machine, to install rapidly the blockchain we will use the fabric sample binaries but with our modification to have a custom blokchain:
 
+- All of this configuration was made on an **Ubuntu 21.04** version
 - Docker: Install Docker
 - Docker Compose: Install Docker Compose
 - Hyperledger Fabric Binaries: Download the binaries and Docker images for Fabric.
