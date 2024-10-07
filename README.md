@@ -8,4 +8,5 @@ Key Components
 - 1 Orderer Node: Responsible for ordering transactions and ensuring the consistency of the blockchain.
 - Single Channel: All providers communicate through a single shared channel.
 - LevelDB: Used as the state database for storing ledger data.
+
 This setup aims to secure interactions among entities with a common goal while maintaining a level of trust using blockchain technology.
