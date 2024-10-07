@@ -11,7 +11,9 @@ Key Components
 
 This setup aims to secure interactions among entities with a common goal while maintaining a level of trust using blockchain technology.
 
-***Please note that the blockchain cannot be used for production. For this, a complete architecture will have to be created. You can find all the necessary information on the Hyperledger. This blockchain can be used for experimentation, training, research or to do proof of work.***
+> [!NOTE]
+> ***Please note that the blockchain cannot be used for production. For this, a complete architecture will have to be created. You can find all the necessary information on the Hyperledger. This blockchain can be used for experimentation, training, research or to do proof of work.***
+
 
 # Prerequisites
 Before you begin, make sure you have the following installed on your machine, to install rapidly the blockchain we will use the fabric sample binaries but with our modification to have a custom blokchain:
