@@ -13,10 +13,14 @@ This setup aims to secure interactions among entities with a common goal while m
 
 > [!NOTE]
 > ***Please note that the blockchain cannot be used for production. For this, a complete architecture will have to be created. You can find all the necessary information on the Hyperledger. This blockchain can be used for experimentation, training, research or to do proof of work.***
+> ***Do not hesiate to contribute or signal if you see errors or if you have any questions :blush:***
+> ***Finally, this project was created to be used with my COBRA framework for my research on creating a collaboration framework using blockchain for Cooperative Edge composed of Edge Server and UAV. "https://github.com/RezanOscar/COBRA"***
 
 > [!CAUTION]
 > All the configuration files that will be described later are in the researhc folder. It is important to respect the architecture of the folder so that everything works.
 
+> [!WARNING]
+> The configuration files will only allow you to create a well-defined blockchain if this does not correspond to your expectations you will have to modify them, so base yourself on these files to make the modifications, and be careful most of the problems you may encounter will be crypto errors due to a bad path to the crypto files
 
 # Prerequisites
 Before you begin, make sure you have the following installed on your machine, to install rapidly the blockchain we will use the fabric sample binaries but with our modification to have a custom blokchain:
