@@ -24,6 +24,9 @@ This setup aims to secure interactions among entities with a common goal while m
 > [!WARNING]
 > The configuration files will only allow you to create a well-defined blockchain if this does not correspond to your expectations you will have to modify them, so base yourself on these files to make the modifications, and be careful most of the problems you may encounter will be crypto errors due to a bad path to the crypto files
 
+> [!IMPORTANT]
+> For the smart contract implementation part and use of an SDK to communicate with the blockchain you will need to consult my page on the COBRA framework present in the link above
+
 # Prerequisites
 Before you begin, make sure you have the following installed on your machine, to install rapidly the blockchain we will use the fabric sample binaries but with our modification to have a custom blokchain:
 
